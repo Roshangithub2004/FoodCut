@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 const foodPartnerSchema = new mongoose.Schema({
-    name:{
-        type:Strint,
+    fullName:{
+        type:String,
         require:true,
     },
 
@@ -15,9 +15,9 @@ const foodPartnerSchema = new mongoose.Schema({
     password:{
         type:String
     },
-})
+}, timestamps = true)
 
-const foodPartnerModel = mongoose.model("foodPartnet", foodPartnerSchema)
+const foodPartnerModel = mongoose.model("foodPartner", foodPartnerSchema)
 
 module.exports = foodPartnerModel
 
