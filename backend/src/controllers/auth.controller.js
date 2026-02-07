@@ -91,7 +91,7 @@ const logoutUser = (async(req, res)=>{
 // Register, login and loguot routes for foodPartner
 
 const registerFoodPartner = (async(req, res)=>{
-    const {fullName, email, password} = req.body
+    const {businessName, contactName, phone, email, password} = req.body
 
     const isPartnerAlreadyExists = await foodPartnerModel.findOne({email})
 
@@ -103,7 +103,9 @@ const registerFoodPartner = (async(req, res)=>{
 
     const hashPassword = await bcrypt.hash(password, 10)
     const newFoodPartner = await foodPartnerModel.create({
-        fullName,
+        businessName,
+        contactName,
+        phone,
         email,
         password: hashPassword
     })
@@ -120,7 +122,9 @@ const registerFoodPartner = (async(req, res)=>{
         newFoodPartner:{
             _id: newFoodPartner._id,
             email:newFoodPartner.email,
-            fullName:newFoodPartner.fullName
+            name:newFoodPartner.name,
+            phone:newFoodPartner.phone,
+            contactName:newFoodPartner.contactName
         }
     })
 })

@@ -8,7 +8,7 @@ const createFood = async (req, res) => {
     // console.log(req.file)
 
     const fileUploadResult = await storageService.uploadFile(req.file.buffer, uuid())
-    console.log(fileUploadResult)
+    // console.log(fileUploadResult)
 
     const foodItem = await foodModel.create({
         name: req.body.name,
@@ -28,7 +28,7 @@ const getFoodItems = async (_req, res) =>{
         message: "Food items featched successfully",
         foodItem
     })
-    console.log(foodItem)
+    // console.log(foodItem)
 }
 
 module.exports = {

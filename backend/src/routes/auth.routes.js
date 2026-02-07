@@ -8,8 +8,8 @@ router.post('/user/login', authControllers.loginUser)
 router.get('/user/logout', authControllers.logoutUser)
 
 // foodPartner auth APIs
-router.post('/foodPartnet/register', authControllers.registerFoodPartner)
-router.post('/foodPartnet/login', authControllers.loginFoodPartner)
-router.get('/foodPartnet/logout', authControllers.logouFoodPartner)
+router.post('/food-partner/register', authControllers.registerFoodPartner)
+router.post('/food-partner/login', authControllers.loginFoodPartner)
+router.get('/food-partner/logout', authControllers.logouFoodPartner)
 
 module.exports = router
