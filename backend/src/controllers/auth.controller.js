@@ -147,7 +147,7 @@ const loginFoodPartner = (async(req, res) =>{
 
     if (! isPasswordValid){
         return res.status(400).json({
-            message:"Invalid email, or password"
+            message:"Invalid email or password"
         })
     }
 
