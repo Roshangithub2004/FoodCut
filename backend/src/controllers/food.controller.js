@@ -7,12 +7,15 @@ const createFood = async (req, res) => {
     // console.log(req.body)
     // console.log(req.file)
 
+    const {name, description} = req.body
     const fileUploadResult = await storageService.uploadFile(req.file.buffer, uuid())
+    
+
     // console.log(fileUploadResult)
 
     const foodItem = await foodModel.create({
-        name: req.body.name,
-        description: req.body.description,
+        name,
+        description,
         video: fileUploadResult.url,
         foodPartner: req.foodPartner._id 
     })

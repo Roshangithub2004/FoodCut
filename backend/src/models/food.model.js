@@ -4,25 +4,27 @@ const foodSchema = new mongoose.Schema({
 
     name:{
         type:String,
-        reqiure:true
+        required:true
     },
 
     video:{
         type:String,
-        reqiure:true
+        required:true
     },
 
-    descriptions:{
+    description:{
         type:String,
+        required: true
 
     },
 
     foodPartner:{
-        type:String,
-        ref:"foodPartner"
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"foodPartner",
+        required:true
     }
 
 })
 
-foodModel = mongoose.model("food", foodSchema)
+const foodModel = mongoose.model("food", foodSchema)
 module.exports = foodModel

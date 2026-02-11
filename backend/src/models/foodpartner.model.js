@@ -25,6 +25,10 @@ const foodPartnerSchema = new mongoose.Schema({
     password:{
         type:String
     },
+    address:{
+        type:String
+    },
+
 }, timestamps = true)
 
 const foodPartnerModel = mongoose.model("foodPartner", foodPartnerSchema)
