@@ -29,4 +29,9 @@ router.post('/save',
     authMiddlewares.authUserMiddleware,
     foodController.foodSave)
 
+router.post('/share', 
+    authMiddlewares.authUserMiddleware,
+    foodController.shareFood
+)
+
 module.exports = router
