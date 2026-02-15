@@ -9,20 +9,20 @@ const commentRoutes = require('./routes/comment.routes.js')
 const app = express()
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CORS_ORIGIN,
     credentials: true
 }))
 app.use(cookieParser())
 app.use(express.json())
 
 app.get('/' , (req, res)=>{
-    res.send("get items")
+    res.send('get items')
 })
 
 app.use('/api/auth', authRoutes)
 app.use('/api/food', foodRoutes)
 app.use('/api/food-partner', foodPartnerRoutes)
-app.use('/api/comment', commentRoutes)
+app.use('/api/comments', commentRoutes)
 
 
 module.exports = app;

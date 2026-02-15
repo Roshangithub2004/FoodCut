@@ -1,9 +1,19 @@
-const { default: mongoose } = require('mongoose')
 const app = require('./src/app.js')
 const connectDB = require('./src/db/db.js')
 require('dotenv').config()
 
-connectDB()
-app.listen(3000, ()=>{
-    console.log("app started listening on port : 3000")
-})
+const PORT = process.env.PORT
+
+const startServer = async () => {
+    try {
+        await connectDB()
+        app.listen(PORT, () => {
+            console.log(`app started listening on port : ${PORT}`)
+        })
+    } catch (error) {
+        console.error('server startup failed', error)
+        process.exit(1)
+    }
+}
+
+startServer()

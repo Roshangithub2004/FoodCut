@@ -2,7 +2,21 @@ const userModel = require('../models/user.model.js')
 const foodPartnerModel = require('../models/foodpartner.model.js')
 const bcrypt = require("bcryptjs")
 const jwt = require('jsonwebtoken')
-const { default: mongoose } = require('mongoose')
+
+const isProduction = process.env.NODE_ENV === 'production'
+
+const cookieOptions = {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax',
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+}
+
+const clearCookieOptions = {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax',
+}
 
 // Register, login and loguot routes for user
 
@@ -29,7 +43,7 @@ const registerUser = (async(req, res)=>{
         id:user._id
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token)
+    res.cookie('token', token, cookieOptions)
 
     res.status(201).json({
         message: "User register successfully",
@@ -69,7 +83,7 @@ const loginUser = (async(req, res)=>{
         id: user._id
     }, process.env.JWT_SECRET)
 
-    res.cookie('token', token)
+    res.cookie('token', token, cookieOptions)
     res.status(200).json({
         message:"User logged in successfully",
         user:{
@@ -81,7 +95,7 @@ const loginUser = (async(req, res)=>{
 })
 
 const logoutUser = (async(req, res)=>{
-    res.clearCookie('token')
+    res.clearCookie('token', clearCookieOptions)
     res.status(200).json({
         message:"User logged out successfully"
     })
@@ -115,7 +129,7 @@ const registerFoodPartner = (async(req, res)=>{
         id: newFoodPartner._id
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token)
+    res.cookie('token', token, cookieOptions)
 
     res.status(201).json({
         message: "Food Partner registered successfully",
@@ -157,7 +171,7 @@ const loginFoodPartner = (async(req, res) =>{
         id: foodPartner._id
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token)
+    res.cookie('token', token, cookieOptions)
     res.status(201).json({
         message:"User logged in successfully",
 
@@ -170,7 +184,7 @@ const loginFoodPartner = (async(req, res) =>{
 })
 
 const logouFoodPartner = (async(req, res)=>{
-    res.clearCookie('token')
+    res.clearCookie('token', clearCookieOptions)
     res.status(200).json({
         message:"User logged out successfully"
     })
@@ -190,4 +204,3 @@ module.exports = {
     logouFoodPartner
 
 }
-
